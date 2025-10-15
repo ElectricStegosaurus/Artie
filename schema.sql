@@ -58,7 +58,7 @@ insert into Vertical values (70, "Food & Beverage");
 drop table if exists Sponsor;
 create table Sponsor (
        id integer primary key,
-       name varchar(100)
+       name varchar(100),
 
        primary_vertical integer,
        foreign key (primary_vertical) references Vertical(id)
@@ -84,7 +84,7 @@ create table Sponsorship (
        foreign key (sponsor) references Sponsor(id)
        foreign key (format) references Format(id)
        foreign key (currency) references Currency(id),
-       foreign key (country) references Country(id)
+       foreign key (country) references Country(id),
        foreign key (vertical) references Vertical(id)
 );
 
