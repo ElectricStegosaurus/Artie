@@ -52,6 +52,8 @@ insert into Vertical values (50, "Media & Entertainment");
 insert into Vertical values (60, "Tech");
 insert into Vertical values (70, "Food & Beverage");
 
+-- TODO: include some benchmarks of CPMs
+
 ------------------------------------------------------------
 -- advertiser side
 
@@ -61,7 +63,17 @@ create table Sponsor (
        name varchar(100),
 
        primary_vertical integer,
-       foreign key (primary_vertical) references Vertical(id)
+
+       default_currency integer,
+       default_country integer,
+       default_format integer,
+
+       -- TODO: brand suitability guidelines
+
+       foreign key (primary_vertical) references Vertical(id),
+       foreign key (default_currency) references Currency(id),
+       foreign key (default_country) references Country(id),
+       foreign key (default_format) references Format(id)
 );
 
 drop table if exists Sponsorship;
@@ -98,6 +110,9 @@ create table Creator (
        name varchar(100),
        num_subscribers integer
        -- TODO: include a breakdown by region
+
+       -- TODO: a place to review the creator's previous content, e.g. youtube channel
+       -- TODO: union status of this creator or episode -- is it a union and which one?
 );
 
 -- TODO: do we need a "channel" concept?
@@ -150,3 +165,7 @@ create table Deals (
        foreign key (episode) references Episode(id)
        foreign key (currency) references Currency(id)
 );
+
+------------------------------------------------------------
+-- script annotations
+
